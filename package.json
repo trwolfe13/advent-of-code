@@ -1,7 +1,7 @@
 {
-  "name": "advent-of-code",
+  "name": "advent-of-code-2017",
   "version": "1.0.0",
-  "description": "Solutions to problems from Advent of Code",
+  "description": "Solutions to problems from Advent of Code (2017)",
   "main": "./src/index.js",
   "scripts": {
     "start": "node ./src/index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/trwolfe13/advent-of-code.git"
+    "url": "git+https://github.com/trwolfe13/advent-of-code-2017.git"
   },
   "author": "Thomas R. Wolfe (trwolfe13)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/trwolfe13/advent-of-code/issues"
+    "url": "https://github.com/trwolfe13/advent-of-code-2017/issues"
   },
-  "homepage": "https://github.com/trwolfe13/advent-of-code#readme",
+  "homepage": "https://github.com/trwolfe13/advent-of-code-2017#readme",
   "devDependencies": {
     "jasmine": "^2.8.0"
   }
