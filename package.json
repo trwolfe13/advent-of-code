@@ -19,5 +19,8 @@
   "homepage": "https://github.com/trwolfe13/advent-of-code-2017#readme",
   "devDependencies": {
     "jasmine": "^2.8.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4"
   }
 }
