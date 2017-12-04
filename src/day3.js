@@ -10,6 +10,7 @@ function spiral(maxNumber) {
 }
 
 module.exports = {
+  spiral,
   part1: function (sequence) {
     // TODO: Solve problem.
     return 0;
