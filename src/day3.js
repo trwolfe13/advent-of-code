@@ -50,9 +50,35 @@ function spiral(maxNumber) {
   return spiralArray;
 }
 
-function sumAdjacent(spiral, coords) {
-  const index = spiral.indexOf(coords);
-  return index
+function coordinatesAdjacent(coords1, coords2) {
+  const xDiff = Math.abs(coords1[0] - coords2[0]);
+  const yDiff = Math.abs(coords1[1] - coords2[1]);
+  return (xDiff === 1 || yDiff === 1) && (xDiff < 2 && yDiff < 2);
+}
+
+function adjacentCoords(sumSpiral, curIndex) {
+  const cell = sumSpiral[curIndex];
+  if (!cell) { return []; }
+  const previousCoords = sumSpiral.slice(1, curIndex);
+  return previousCoords.filter(i => coordinatesAdjacent(i.coords, cell.coords));
+}
+
+function sumAdjacent(sumSpiral, curIndex) {
+  const cell = sumSpiral[curIndex];
+  if (!cell || !cell.coords) { return 0; }
+  if (cell.coords[0] === 0 && cell.coords[1] === 0) return 1;
+
+  const adjacent = adjacentCoords(sumSpiral, curIndex);
+  return adjacent.reduce((prev, curr) => prev + (curr ? curr.total : 0), 0);
+}
+
+function sumSpiral(spiral) {
+  const sumSpiral = spiral.map(coords => ({ coords, total: 0 }));
+  sumSpiral.forEach((cell, index) => {
+    const total = sumAdjacent(sumSpiral, index);
+    cell.total = total;
+  });
+  return sumSpiral;
 }
 
 module.exports = {
@@ -60,13 +86,22 @@ module.exports = {
   nextDirection,
   move,
   spiral,
+  coordinatesAdjacent,
+  adjacentCoords,
   sumAdjacent,
+  sumSpiral,
   part1: function (maxNumber) {
     const coords = spiral(maxNumber)[maxNumber];
     return Math.abs(coords[0]) + Math.abs(coords[1]);
   },
-  part2: function (sequence) {
-    // TODO: Solve problem.
-    return 0;
+  part2: function (input, cellCount) {
+    const genSpiral = spiral(cellCount);
+    const summedSpiral = sumSpiral(genSpiral);
+    for (let i = 0, len = summedSpiral.length; i < len; i++) {
+      if (summedSpiral[i].total > input) {
+        return summedSpiral[i].total;
+      }
+    }
+    return -1;
   }
 }

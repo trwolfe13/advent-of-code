@@ -45,18 +45,63 @@ describe('day3', () => {
       ]);
     });
   });
-  describe('sumAdjacent', () => {
-    it('produces correct output at 1', () => {
-      const spiral = day3.spiral(10);
-      const coords = [0, 0];
-      const result = day3.sumAdjacent(spiral, coords);
-      expect(result).toBe(1);
+  describe('coordinatesAdjacent', () => {
+    it('produces correct output', () => {
+      expect(day3.coordinatesAdjacent([0, 0], [-1, 1])).toBeTruthy();
+      expect(day3.coordinatesAdjacent([0, 0], [0, 1])).toBeTruthy();
+      expect(day3.coordinatesAdjacent([0, 0], [1, 1])).toBeTruthy();
+      expect(day3.coordinatesAdjacent([0, 0], [-1, 0])).toBeTruthy();
+      expect(day3.coordinatesAdjacent([0, 0], [0, 0])).toBeFalsy();
+      expect(day3.coordinatesAdjacent([0, 0], [1, 0])).toBeTruthy();
+      expect(day3.coordinatesAdjacent([0, 0], [-1, -1])).toBeTruthy();
+      expect(day3.coordinatesAdjacent([0, 0], [0, -1])).toBeTruthy();
+      expect(day3.coordinatesAdjacent([0, 0], [1, -1])).toBeTruthy();
+      expect(day3.coordinatesAdjacent([0, 0], [2, -1])).toBeFalsy();
+      expect(day3.coordinatesAdjacent([-1, 1], [1, 1])).toBeFalsy();
     });
+  });
+  describe('adjacentCoords', () => {
+    it('produces correct output', () => {
+
+      const sumSpiral = [
+        { coords: undefined, total: 0 },
+        { coords: [0, 0], total: 0 },
+        { coords: [1, 0], total: 0 },
+        { coords: [1, 1], total: 0 },
+        { coords: [0, 1], total: 0 },
+        { coords: [-1, 1], total: 0 },
+        { coords: [-1, 0], total: 0 },
+        { coords: [-1, -1], total: 0 },
+        { coords: [0, -1], total: 0 },
+        { coords: [1, -1], total: 0 },
+        { coords: [2, -1], total: 0 },
+      ];
+
+      expect(day3.adjacentCoords(sumSpiral, 1)).toEqual([]);
+      expect(day3.adjacentCoords(sumSpiral, 2)).toEqual([{ coords: [0, 0], total: 0 }]);
+      expect(day3.adjacentCoords(sumSpiral, 3)).toEqual([
+        { coords: [0, 0], total: 0 },
+        { coords: [1, 0], total: 0 }
+      ]);
+      expect(day3.adjacentCoords(sumSpiral, 4)).toEqual([
+        { coords: [0, 0], total: 0 },
+        { coords: [1, 0], total: 0 },
+        { coords: [1, 1], total: 0 },
+      ]);
+    });
+  });
+  describe('sumSpiral', () => {
     it('produces correct output at 1', () => {
       const spiral = day3.spiral(10);
-      const coords = [0, 0];
-      const result = day3.sumAdjacent(spiral, coords);
-      expect(result).toBe(1);
+      const result = day3.sumSpiral(spiral);
+      expect(result[1].total).toBe(1);
+      expect(result[2].total).toBe(1);
+      expect(result[3].total).toBe(2);
+      expect(result[4].total).toBe(4);
+      expect(result[5].total).toBe(5);
+      expect(result[6].total).toBe(10);
+      expect(result[7].total).toBe(11);
+      expect(result[8].total).toBe(23);
     });
   });
   describe('part1', () => {
