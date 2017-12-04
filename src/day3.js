@@ -50,11 +50,17 @@ function spiral(maxNumber) {
   return spiralArray;
 }
 
+function sumAdjacent(spiral, coords) {
+  const index = spiral.indexOf(coords);
+  return index
+}
+
 module.exports = {
   Direction,
   nextDirection,
   move,
   spiral,
+  sumAdjacent,
   part1: function (maxNumber) {
     const coords = spiral(maxNumber)[maxNumber];
     return Math.abs(coords[0]) + Math.abs(coords[1]);

@@ -45,6 +45,20 @@ describe('day3', () => {
       ]);
     });
   });
+  describe('sumAdjacent', () => {
+    it('produces correct output at 1', () => {
+      const spiral = day3.spiral(10);
+      const coords = [0, 0];
+      const result = day3.sumAdjacent(spiral, coords);
+      expect(result).toBe(1);
+    });
+    it('produces correct output at 1', () => {
+      const spiral = day3.spiral(10);
+      const coords = [0, 0];
+      const result = day3.sumAdjacent(spiral, coords);
+      expect(result).toBe(1);
+    });
+  });
   describe('part1', () => {
     it('Produces the correct output', () => {
       const input = 1;

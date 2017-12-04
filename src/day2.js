@@ -1,10 +1,10 @@
 const _ = require('lodash');
 
 function parseNumbers (sequence) {
-  const rows = sequence.match(/[^\r\n]+/g);
+  const rows = sequence.match(/[^\r\n]+/g).map(r => r.trim());
 
   return rows
-    .map(row => row.trim().split(/ +/g).map(n => Number(n)))
+    .map(row => row.split(/ +/g).map(n => Number(n)))
     .filter(array => array.length > 1);
 }
 
