@@ -61,6 +61,7 @@ const day5 = require('./day5');
     console.log('Day 5, Part 1 Answer:', answer);
   }
   { // Part 2
-    
+    const answer = day5.part2(input);
+    console.log('Day 5, Part 2 Answer:', answer);
   }
 }

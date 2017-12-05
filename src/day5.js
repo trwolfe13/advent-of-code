@@ -7,6 +7,16 @@ function execute(instructions, index) {
   return index + jump;
 }
 
+function executePart2(instructions, index) {
+  const jump = instructions[index];
+  if (instructions[index] >= 3) {
+    instructions[index]--;
+  } else {
+    instructions[index]++;
+  }
+  return index + jump;
+}
+
 module.exports = {
   parse,
   execute,
@@ -21,6 +31,13 @@ module.exports = {
     return total;
   },
   part2: function (input) {
-    return 0;
+    const instructions = parse(input);
+    let total = 0;
+    let index = 0;
+    do {
+      index = executePart2(instructions, index);
+      total++;
+    } while (index > -1 && index < instructions.length)
+    return total;
   }
 }
