@@ -32,6 +32,17 @@ module.exports = {
     }
   },
   part2: function (input) {
-
+    let arr = parse(input);
+    const states = [arr];
+    let steps = 0;
+    while (true) {
+      arr = reallocate(arr);
+      steps++;
+      const fIndex = states.findIndex(a => _.isEqual(a, arr));
+      if (fIndex > -1) {
+        return steps - fIndex;
+      }
+      states.push(arr);
+    }
   }
 }

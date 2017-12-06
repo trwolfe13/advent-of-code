@@ -4,9 +4,8 @@ const day6 = require('./day6');
 
 const input = fs.readFileSync(path.join(__dirname, './input.txt'), 'utf8');
 
-console.log(input);
 let answer = day6.part1(input);
 console.log('Part 1', answer);
 
-// answer = day6.part2(input);
-// console.log('Part 2', answer);
+answer = day6.part2(input);
+console.log('Part 2', answer);
