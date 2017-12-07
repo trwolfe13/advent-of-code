@@ -13,7 +13,7 @@ describe('day2', () => {
     });
   });
   describe('part2', () => {
-    if ('Produces the correct output', () => {
+    it('Produces the correct output', () => {
       const input = `
         5 9 2 8
         9 4 7 3

@@ -35,7 +35,7 @@ describe('day6', () => {
     });
   });
   describe('part2', () => {
-    if ('Produces the correct output', () => {
+    it('Produces the correct output', () => {
       const input = '0 2 7 0';
       expect (day6.part2(input)).toEqual(4);
     });

@@ -1,13 +1,13 @@
-const day4 = require('./day4');
+const day6 = require('./day6');
 
-describe('day4', () => {
+describe('day7', () => {
   describe('part1', () => {
     it('Produces the correct output', () => {
-      
+    
     });
   });
   describe('part2', () => {
-    it('Produces the correct output', () => {
+    it ('Produces the correct output', () => {
       
     });
   });

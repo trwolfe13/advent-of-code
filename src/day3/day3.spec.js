@@ -122,7 +122,7 @@ describe('day3', () => {
     });
   });
   describe('part2', () => {
-    if ('Produces the correct output', () => {
+    it('Produces the correct output', () => {
       const input = '';
       const result = day3.part2(input);
       expect(result).toBe(0);

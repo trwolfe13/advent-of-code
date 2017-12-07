@@ -9,7 +9,7 @@ describe('day5', () => {
     });
   });
   describe('part2', () => {
-    if ('Produces the correct output', () => {
+    it('Produces the correct output', () => {
       
     });
   });
