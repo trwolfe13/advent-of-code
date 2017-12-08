@@ -95,6 +95,7 @@ module.exports = {
     return Math.abs(coords[0]) + Math.abs(coords[1]);
   },
   part2: function (input, cellCount) {
+    cellCount = cellCount || 100;
     const genSpiral = spiral(cellCount);
     const summedSpiral = sumSpiral(genSpiral);
     for (let i = 0, len = summedSpiral.length; i < len; i++) {
