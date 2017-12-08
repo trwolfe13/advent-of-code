@@ -1,5 +1,5 @@
 function parse(input) {
-  return input.match(/[^\r\n]+/g).map(r => Number(r.trim()));
+  return input.match(/[^\r\n]+/g).map(r => r.trim()).filter(r => r).map(r => Number(r.trim()));
 }
 
 function execute(instructions, index) {
