@@ -121,11 +121,4 @@ describe('day3', () => {
       expect(result).toBe(31);
     });
   });
-  describe('part2', () => {
-    it('Produces the correct output', () => {
-      const input = '';
-      const result = day3.part2(input);
-      expect(result).toBe(0);
-    });
-  });
 });
