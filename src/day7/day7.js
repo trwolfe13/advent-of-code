@@ -1,6 +1,3 @@
-const _ = require('lodash');
-
-
 function parse(input) {
   const output = {};
   let match;
@@ -8,20 +5,21 @@ function parse(input) {
   while (match = regex.exec(input)) {
     output[match[1]] = { name: match[1], weight: Number(match[2]), children: match[4] ? match[4].split(', ') : [] };
   }
-  convertToTreeInPlace(output);
-  return findRoot(output);
-}
-
-function convertToTreeInPlace(input) {
-  Object.keys(input).map(n => input[n]).forEach(node => {
+  
+  // Convert child name references to actual instances and assign a parent.
+  const instances = Object.keys(output).map(n => output[n])
+  instances.forEach(node => {
     node.children = node.children.map(n => {
-      input[n].parent = node;
-      return input[n];
+      output[n].parent = node;
+      return output[n];
     });
   });
+  const rootNode = instances.filter(node => !existsAsChild(output, node))[0];
+  calculateWeights(rootNode);
+  return rootNode;
 }
 
-function containsAsChild(input, node) {
+function existsAsChild(input, node) {
   const nodes = Object.keys(input).map(n => input[n]);
   for (let n = 0; n < nodes.length; n++) {
     if (nodes[n].children.includes(node)) {
@@ -31,21 +29,14 @@ function containsAsChild(input, node) {
   return false;
 }
 
-function findRoot(input) {
-  return Object.keys(input).map(n => input[n]).filter(node => !containsAsChild(input, node))[0];
+function calculateWeights(tree) {
+  return tree.totalWeight = tree.weight + tree.children.reduce((total, child) => total + calculateWeights(child), 0);
 }
 
 function getUnbalanced(input) {
   const unbalanced = input.children.filter(c => input.children.filter(c2 => c.totalWeight === c2.totalWeight).length === 1);
-  if (unbalanced.length === 0) {
-    return input;
-  } else {
-    return getUnbalanced(unbalanced[0]);
-  }
-}
-
-function totalWeight(tree) {
-  return tree.totalWeight = tree.weight + tree.children.reduce((total, child) => total + totalWeight(child), 0);
+  if (unbalanced.length === 0) { return input; }
+  return getUnbalanced(unbalanced[0]);
 }
 
 module.exports = {
@@ -56,7 +47,6 @@ module.exports = {
   },
   part2: function (input) {
     const tree = parse(input);
-    totalWeight(tree);
     const unbalanced = getUnbalanced(tree);
     const parent = unbalanced.parent;
     const correctNodes = parent.children.filter(c => parent.children.filter(c2 => c.totalWeight === c2.totalWeight).length > 1)
