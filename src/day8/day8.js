@@ -27,6 +27,9 @@ function parse(input) {
           val -= Number(m[3]);
         }
         register[m[1]] = val;
+        if (val > (register._max || 0)) {
+          register._max = val;
+        }
       }
     });
   }
@@ -39,10 +42,12 @@ module.exports = {
     const register = {};
     const instructions = parse(input);
     instructions.forEach(i => i(register));
-    return _.max(Object.keys(register).map(r => register[r]));
+    return _.max(Object.keys(register).filter(k => k !== '_max').map(r => register[r]));
   },
   part2: function (input) {
-    const tree = parse(input);
-    return 0;
+    const register = {};
+    const instructions = parse(input);
+    instructions.forEach(i => i(register));
+    return register._max;
   }
 }
