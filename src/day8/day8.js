@@ -1,53 +1,40 @@
-const _ = require('lodash');
-
-function evaluate(left, condition, right) {
-  switch (condition) {
-    case '<': return left < right;
-    case '<=': return left <= right;
-    case '>': return left > right;
-    case '>=': return left >= right;
-    case '==': return left === right;
-    case '!=': return left !== right;
-  }
-  throw new Error('Unrecognized condition: ' + condition);
-}
+const evaluators = {
+  '<': (l, r) => l < r,
+  '<=': (l, r) => l <= r,
+  '>': (l, r) => l > r,
+  '>=': (l, r) => l >= r,
+  '==': (l, r) => l === r,
+  '!=': (l, r) => l !== r,
+};
 
 function parse(input) {
-  const output = [];
+  const output = [], regex = /(\w+) (inc|dec) (-?\d+) if (\w+) ([<>!=]{1,2}) (-?\d+)/g;
   let match;
-  const regex = /(\w+) (inc|dec) (-?\d+) if (\w+) ([<>!=]{1,2}) (-?\d+)/g;
   while (match = regex.exec(input)) {
     let m = match;
     output.push(register => {
-      if (evaluate(Number(register[m[4]] || '0'), m[5], Number(m[6]))) {
-        let val = register[m[1]] || 0;
-        if (m[2] === 'inc') {
-          val += Number(m[3]);
-        } else {
-          val -= Number(m[3]);
-        }
-        register[m[1]] = val;
-        if (val > (register._max || 0)) {
-          register._max = val;
-        }
+      if (evaluators[m[5]](Number(register.values[m[4]] || '0'), Number(m[6]))) {
+        const val = (register.values[m[1]] || 0) + (Number(m[3]) * (m[2] === 'dec' ? -1 : 1));
+        register.values[m[1]] = val;
+        register.max = Math.max(val, register.max);
       }
     });
   }
-  return output
+  return output;
 }
 
 module.exports = {
   parse,
   part1: function (input) {
-    const register = {};
+    const register = { max: 0, values: {} };
     const instructions = parse(input);
     instructions.forEach(i => i(register));
-    return _.max(Object.keys(register).filter(k => k !== '_max').map(r => register[r]));
+    return Math.max(...Object.keys(register.values).filter(k => k !== '_max').map(r => register.values[r]));
   },
   part2: function (input) {
-    const register = {};
+    const register = { max: 0, values: {} };
     const instructions = parse(input);
     instructions.forEach(i => i(register));
-    return register._max;
+    return register.max;
   }
 }
