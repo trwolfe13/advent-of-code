@@ -13,9 +13,8 @@ function execute(input) {
   let m;
   while (m = regex.exec(input)) {
     if (!evaluators[m[5]](Number(register.values[m[4]] || '0'), Number(m[6]))) { continue; }
-    const val = (register.values[m[1]] || 0) + (Number(m[3]) * (m[2] === 'dec' ? -1 : 1));
-    register.values[m[1]] = val;
-    register.max = Math.max(val, register.max);
+    register.values[m[1]] = (register.values[m[1]] || 0) + (Number(m[3]) * (m[2] === 'dec' ? -1 : 1));
+    register.max = Math.max(register.values[m[1]], register.max);
   }
   return register;
 }
