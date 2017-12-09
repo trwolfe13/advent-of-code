@@ -1,14 +1,12 @@
 function countGroups (s) {
   let t = 0, d = 1, g = false, f = 0, c;
-  for (let n = 0; n < s.length; n++) {
-    switch (!!(c = s.charAt(n))) {
-      case c === '!': n++; break;
-      case c === '>': g = false; break;
-      case g: { f++; break; }
-      case c === '{' && !g: t += d++; break;
-      case c === '}' && !g: d--; break;
-      case c === '<': g = true; break;
-    }
+  for (let n = 0, c = s[0]; n < s.length; n++ , c = s[n]) {
+    if (c === '!') n++;
+    else if (c === '>') g = false;
+    else if (g) f++;
+    else if (c === '{' && !g) t += d++;
+    else if (c === '}' && !g) d--;
+    else if (c === '<') g = true;
   }
   return { t, f };
 }
