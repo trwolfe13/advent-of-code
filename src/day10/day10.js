@@ -23,6 +23,7 @@ module.exports = {
     return checksum(l, lens);
   },
   part2: function (input) {
-    return 0;
+    let l = _.times(256, Number), lens = input.split(',').map(s => s.charCodeAt(0));
+    return checksum(l, lens);
   }
 }
