@@ -30,9 +30,15 @@ describe('day8', () => {
       expect(reversed).toEqual([3, 4, 2, 1, 0]);
     });
   });
+  describe('checksum', () => {
+    it('Produces the correct output 1', () => {
+      const input = inputs[0];
+      const checksum = day10.checksum(input.list, [3, 4, 1, 5]);
+      expect(checksum).toEqual(12);
+    });
+  });
   describe('part1', () => {
     it('Produces the correct output 1', () => {
-
     });
   });
   describe('part2', () => {
