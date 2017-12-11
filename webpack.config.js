@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 
 module.exports = {
-  context: path.join(__dirname, './src/day8/graph'),
+  context: path.join(__dirname, './src/2017/day8/graph'),
   target: 'web',
   entry: [
     './index.js'
