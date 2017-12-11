@@ -17,13 +17,8 @@ function checksum(l, lens, times = 1) {
   return l;
 }
 
-function dense(l) {
-  return _.chunk(l, 16).map(c => c.reduce((p, c) => p ^ c, 0));
-}
-
-function toHex(a) {
-  return a.map(n => n.toString(16)).map(n => n.length === 1 ? '0' + n : n).join('');
-}
+const dense = l =>_.chunk(l, 16).map(c => c.reduce((p, c) => p ^ c, 0));
+const toHex = a => a.map(n => n.toString(16)).map(n => n.length === 1 ? '0' + n : n).join('');
 
 module.exports = {
   reverse,
