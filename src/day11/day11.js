@@ -1,36 +1,22 @@
 const move = {
-  'n': ([x, y]) => [x, y - 1],
-  's': ([x, y]) => [x, y + 1],
-  'nw': ([x, y]) => [x - 1, y],
-  'sw': ([x, y]) => [x - 1, y + 1],
-  'ne': ([x, y]) => [x + 1, y - 1],
-  'se': ([x, y]) => [x + 1, y],
+  'n': ([x, y]) => [x, y - 1], 's': ([x, y]) => [x, y + 1],
+  'nw': ([x, y]) => [x - 1, y], 'sw': ([x, y]) => [x - 1, y + 1],
+  'ne': ([x, y]) => [x + 1, y - 1], 'se': ([x, y]) => [x + 1, y],
 };
 
-function distance(end, start = [0, 0]) {
-  const dx = end[0] - start[0];
-  const dy = end[1] - start[0];
-  if (Math.sign(dx) === Math.sign(dy)) {
-    return Math.abs(dx) + Math.abs(dy);
-  } else {
-    return Math.max(Math.abs(dx), Math.abs(dy));
-  }
+function distance(e) {
+  return Math.sign(e[0]) === Math.sign(e[1]) ? Math.abs(e[0]) + Math.abs(e[1]) : Math.max(Math.abs(e[0]), Math.abs(e[1]));
 }
 
 module.exports = {
   move,
   part1: function (input) {
-    let coord = [0, 0];
-    input.split(',').forEach(step => {
-      coord = move[step](coord);
-    });
-    return distance(coord);
+    let c = [0, 0];
+    input.split(',').forEach(step => c = move[step](c));
+    return distance(c);
   },
   part2: function (input) {
-    let coord = [0, 0], max = 0;
-    input.split(',').forEach(step => {
-      max = Math.max(max, distance(coord = move[step](coord)));
-    });
-    return max;
+    let c = [0, 0];
+    return Math.max(...input.split(',').map(s => distance(c = move[s](c))));
   }
 }
