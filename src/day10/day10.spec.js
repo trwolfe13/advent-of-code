@@ -34,7 +34,8 @@ describe('day8', () => {
     it('Produces the correct output 1', () => {
       const input = inputs[0];
       const checksum = day10.checksum(input.list, [3, 4, 1, 5]);
-      expect(checksum).toEqual(12);
+      const m = checksum[0] * checksum[1];
+      expect(m).toEqual(12);
     });
   });
   describe('part1', () => {
