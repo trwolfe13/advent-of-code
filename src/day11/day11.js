@@ -27,6 +27,12 @@ module.exports = {
     return distance(coord);
   },
   part2: function (input) {
-    return 0;
+    let max = 0;
+    let coord = [0, 0];
+    input.split(',').forEach(step => {
+      coord = move[step](coord);
+      max = Math.max(max, distance(coord));
+    });
+    return max;
   }
 }
