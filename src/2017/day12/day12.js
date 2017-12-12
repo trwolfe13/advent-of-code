@@ -6,12 +6,17 @@ function map(g, l, n = 0) {
 
 module.exports = {
   part1: function (input) {
-    const z = [];
-    const g = input.match(/[^\r\n]+/g).map(n => n.substring(n.indexOf('>') + 2).trim().split(', ').map(Number));
+    const z = [], g = input.match(/[^\r\n]+/g).map(n => n.substring(n.indexOf('>') + 2).trim().split(', ').map(Number));
     map(g, z);
     return z.length;
   },
   part2: function (input) {
-    return 0;
+    const z = [], g = input.match(/[^\r\n]+/g).map(n => n.substring(n.indexOf('>') + 2).trim().split(', ').map(Number));
+    let c = 0;
+    g.forEach((_, i) => {
+      if (z.includes(i)) return;
+      map(g, z, i); c++;
+    });
+    return c;
   }
 }

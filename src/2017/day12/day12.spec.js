@@ -10,15 +10,15 @@ describe('day12', () => {
     5 <-> 6
     6 <-> 4, 5
   `.trim();
-  
+
   describe('part1', () => {
     it('Produces the correct output 1', () => {
       expect(day12.part1(input)).toBe(6);
     });
   });
   describe('part2', () => {
-    it('Produces the correct output 1', () => {
-
+      it('Produces the correct output 1', () => {
+      expect(day12.part2(input)).toBe(2);
     });
   });
 });
