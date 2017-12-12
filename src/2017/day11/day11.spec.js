@@ -1,6 +1,6 @@
 const day11 = require('./day11');
 
-describe('day8', () => {
+describe('day11', () => {
   describe('move', () => {
     it('moves north', () => {
       expect(day11.move['n']([0, 0])).toEqual([0, -1]);

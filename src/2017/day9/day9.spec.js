@@ -1,6 +1,6 @@
 const day9 = require('./day9');
 
-describe('day8', () => {
+describe('day9', () => {
   describe('part1', () => {
     it('Produces the correct output 1', () => {
       const input = '{}'

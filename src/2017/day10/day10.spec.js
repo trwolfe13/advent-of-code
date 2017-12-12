@@ -1,6 +1,6 @@
 const day10 = require('./day10');
 
-describe('day8', () => {
+describe('day10', () => {
   const inputs = [
     { list: [0, 1, 2, 3, 4], index: 0, length: 3 },
     { list: [2, 1, 0, 3, 4], index: 3, length: 4 },
