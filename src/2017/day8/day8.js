@@ -32,7 +32,6 @@ function execute (input, history = {}) {
 
     steps++;
   }
-  console.log(steps);
   return register;
 }
 

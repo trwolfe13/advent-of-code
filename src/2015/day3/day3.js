@@ -13,7 +13,6 @@ module.exports = {
       p[c[0]][c[1]] = (p[c[0]][c[1]] || 0) + 1;
       c = move[d](c);
     });
-    console.log(p);
     return p.filter(n => n).reduce((p, c) => p + c.filter(n => n).length, 0);
   },
   part2: function (input) {
