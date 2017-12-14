@@ -2,7 +2,7 @@ const parse = i => Object.assign({}, ...i.match(/[^\r\n]+/g).map(s => s.trim().s
 
 function positionAt(l, t) {
   const cm = l - 1;
-  return cm - Math.abs((t % (2 * cm)) - cm);
+  return cm - Math.abs(t % (2 * cm) - cm);
 }
 
 function severity(f) {
