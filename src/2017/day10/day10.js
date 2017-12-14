@@ -24,12 +24,12 @@ module.exports = {
   reverse,
   checksum,
   part1: function (input) {
-    let l = Array(256).keys(), lens = input.split(',').map(Number);
+    let l = [...Array(256).keys()], lens = input.split(',').map(Number);
     const check = checksum(l, lens);
     return check[0] * check[1];
   },
   part2: function (input) {
-    let l = Array(256).keys(), lens = [...input.split('').map(s => s.charCodeAt(0)), 17, 31, 73, 47, 23];
+    let l = [...Array(256).keys()], lens = [...input.split('').map(s => s.charCodeAt(0)), 17, 31, 73, 47, 23];
     return toHex(dense(checksum(l, lens, 64)));
   }
 }
