@@ -1,5 +1,7 @@
 const parse = i => i.match(/[^\r\n]+/g).map(n => n.split(' '));
 const registers = () => ({ a: 0, b: 0, i: 0, f: 0, p: 0, snd: 0, _: 0 });
+const terminated = p => (p._ < 0 || p._ >= p.length);
+const execute = (p, i) => { let x = i[p._]; instructions[x[0]](instructions, p, ...x.slice(1)); }
 
 const instructions = {
   get: (r, x) => isNaN(x) ? r[x] : Number(x),
@@ -12,13 +14,10 @@ const instructions = {
   jgz: (i, r, x, y) => { if (i.get(r, x) > 0) { r._ += i.get(r, y) } else { r._++ } }
 }
 
-module.exports = {
-  part1: input => {
-    const ins = parse(input), r = registers();
-    while (r._ > -1 && r._ < ins.length) {
-      instructions[ins[r._][0]](instructions, r, ...ins[r._].slice(1));
-    }
-    return r.snd;
-  },
-  part2: i => 0
-}
+module.exports = function (input) {
+  const i = parse(input), r = registers();
+  while (!terminated(r)) {
+    execute(r, i);
+  }
+  return r.snd;
+};

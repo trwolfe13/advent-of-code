@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const day18 = require('./day18');
+const day18 = { part1: require('./day18.part1'), part2: require('./day18.part2') };
 
 const input = fs.readFileSync(path.join(__dirname, './input.txt'), 'utf8');
 
