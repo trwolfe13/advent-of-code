@@ -40,18 +40,19 @@ function findDirection(graph, position, direction) {
 
 function walk(graph) {
   let position = findStart(graph), direction = Direction.DOWN, buffer = '';
+  let count = 0;
   while (positionValid(graph, position)) {
     let c = char(graph, position);
-    console.log('C: ', position, buffer);
     switch (c) {
       case VTRAVEL: case HTRAVEL: break;
       case CHANGED: direction = findDirection(graph, position, direction); break;
-      case ' ': return buffer;
+      case ' ': return { buffer: buffer.trim(), count };
       default: buffer += c; break;
     }
     position = move(position, direction);
+    count++;
   }
-  return buffer.trim();
+  return { buffer: buffer.trim(), count };
 }
 
 module.exports = {
@@ -61,9 +62,11 @@ module.exports = {
   part1: function (input) {
     const graph = parse(input);
     const path = walk(graph);
-    return path;
+    return path.buffer;
   },
   part2: function (input) {
-    return 0;
+    const graph = parse(input);
+    const path = walk(graph);
+    return path.count;
   }
 }
