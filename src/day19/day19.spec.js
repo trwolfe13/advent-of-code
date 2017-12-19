@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const day19 = require('./day19');
 
-describe('day18', () => {
+describe('day19', () => {
 
   const input = fs.readFileSync(path.join(__dirname, './input.test.txt'), 'utf8');
 
