@@ -6,17 +6,28 @@ const parseParticle = def => ({ p: parsePart(def, 'p'), v: parsePart(def, 'v'), 
 const parse = i => i.match(/[^\r\n]+/g).map(parseParticle);
 
 const move = p => {
-  p.v.0 += p.a.0;
-  p.v.1 += p.a.1;
-  p.v.2 += p.a.2;
-  p.p.0 += p.v.0;
-  p.p.1 += p.v.1;
-  p.p.2 += p.v.2;
+  p.v[0] += p.a[0];
+  p.v[1] += p.a[1];
+  p.v[2] += p.a[2];
+  p.p[0] += p.v[0];
+  p.p[1] += p.v[1];
+  p.p[2] += p.v[2];
 }
+
+const distance = p => p.p.reduce((p, c) => p + Math.abs(c), 0);
 
 module.exports = {
   part1: function (input) {
-    return parse(input);
+    const particles = parse(input);
+    for (let n = 0; n < 1000; n++) {
+      particles.forEach(move);
+    }
+    let sIdx = 0, sDst = distance(particles[0]);
+    for (let n = 0; n < particles.length; n++) {
+      const d = distance(particles[n]);
+      if (d < sDst) { sIdx = n; sDst = d; }
+    }
+    return sIdx;
   },
   part2: function (input) {
     return 0;
