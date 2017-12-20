@@ -15,6 +15,7 @@ const move = p => {
 }
 
 const distance = p => p.p.reduce((p, c) => p + Math.abs(c), 0);
+const safe = particles => p => particles.filter(p2 => p2 !== p && p2.p[0] === p.p[0] && p2.p[1] === p.p[1] && p2.p[2] === p.p[2]).length === 0;
 
 module.exports = {
   part1: function (input) {
@@ -30,6 +31,11 @@ module.exports = {
     return sIdx;
   },
   part2: function (input) {
-    return 0;
+    let particles = parse(input), s = safe(particles);
+    for (let n = 0; n < 100; n++) {
+      particles.forEach(move);
+      particles = particles.filter(s);
+    }
+    return particles.length;
   }
 }
