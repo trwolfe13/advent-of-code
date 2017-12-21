@@ -18,6 +18,10 @@ const parse = i => {
 module.exports = {
   parse,
   part1: function (input) {
+    let image = parse(input);
+    for (let n = 0; n <= 5; n++) {
+
+    }
     return 0;
   },
   part2: function (input) {
