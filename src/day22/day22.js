@@ -1,6 +1,7 @@
-const parse = i => i.match(/[^\r\n]+/g).map(line => line.split('').map(c => c === '#'));
-
 const Direction = { UP: 0, RIGHT: 1, DOWN: 2, LEFT: 3 };
+const State = { CLEAN: 0, INFECTED: 1, WEAKENED: 2, FLAGGED: 3 };
+
+const parse = i => i.match(/[^\r\n]+/g).map(line => line.split('').map(c => c === '#' ? State.INFECTED : State.CLEAN));
 
 const turnRight = d => {
   switch (d) {
@@ -37,7 +38,7 @@ function infiniteGrid (start) {
 
   const create = (x, y) => {
     if (!grid[y]) { grid[y] = {}; }
-    if (!grid[y][x]) { grid[y][x] = false; }
+    if (!grid[y][x]) { grid[y][x] = State.CLEAN; }
   }
 
   return {
@@ -45,13 +46,12 @@ function infiniteGrid (start) {
       create(x, y);
       return grid[y][x];
     },
-    flip: function ([x, y]) {
+    set: function ([x, y], state) {
       create(x, y);
-      grid[y][x] = !grid[y][x];
+      grid[y][x] = state;
     }
   }
 }
-
 
 module.exports = {
   part1: function (input, start = 12, times = 10000) {
@@ -60,15 +60,43 @@ module.exports = {
 
     for (let n = 0; n < times; n++) {
       const cur = grid.get(pos);
-      dir = cur ? turnRight(dir) : turnLeft(dir);
-      grid.flip(pos);
+      dir = cur === State.INFECTED ? turnRight(dir) : turnLeft(dir);
+      grid.set(pos, cur === State.CLEAN ? State.INFECTED : State.CLEAN);
       pos = move(pos, dir);
-      if (!cur) { count++; }
+      if (cur === State.CLEAN) { count++; }
     }
 
     return count;
   },
-  part2: function (input) {
-    return 0;
-  }
+  part2: function (input, start = 12, times = 10000000) {
+    const grid = infiniteGrid(input);
+    let pos = [start, start], dir = Direction.UP, count = 0;
+
+    for (let n = 0; n < times; n++) {
+      const cur = grid.get(pos);
+      let nextState = State.CLEAN;
+      switch (cur) {
+        case State.CLEAN:
+          dir = turnLeft(dir);
+          nextState = State.WEAKENED;
+          break;
+        case State.INFECTED:
+          dir = turnRight(dir);
+          nextState = State.FLAGGED;
+          break;
+        case State.WEAKENED:
+          nextState = State.INFECTED;
+          break;
+        case State.FLAGGED:
+          dir = turnRight(turnRight(dir));
+          nextState = State.CLEAN;
+          break;
+      }
+      grid.set(pos, nextState);
+      pos = move(pos, dir);
+      if (cur === State.WEAKENED) { count++; }
+    }
+
+    return count;
+  },
 }

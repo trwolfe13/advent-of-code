@@ -27,7 +27,12 @@ describe('day22', () => {
 
   describe('part2', () => {
     it('Produces the correct output 1', () => {
-
+      it('Produces the correct output 3x3', () => {
+        expect(day22.part2(start, 4, 100)).toBe(26);
+      });
+      it('Produces the correct output 3x3', () => {
+        expect(day22.part2(start, 4, 10000000)).toBe(2511944);
+      });
     });
   });
 });
