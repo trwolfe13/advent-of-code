@@ -1,6 +1,5 @@
 const _ = require('lodash');
 const hashToInt = c => c === '#' ? 1 : 0;
-const mapHashToInt = r => r.split('').map(hashToInt);
 
 const twoByTwoSquare = (i, x, y) => {
   const xn = 2 * x, yn = 2 * y;
@@ -43,7 +42,7 @@ const start = [
 const parse = i => {
   const o = i.match(/[^\r\n]+/g).map(l => {
     const p = l.split(' => ');
-    return { [p[0].replace(/#/g, '1').replace(/\./g, '0')]: p[1].split('/').map(mapHashToInt) };
+    return { [p[0].replace(/#/g, '1').replace(/\./g, '0')]: p[1].replace(/\//g, '').split('').map(hashToInt) };
   });
   return Object.assign({}, ...o);
 }
