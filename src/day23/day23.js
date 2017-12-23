@@ -11,71 +11,57 @@ const instructions = {
   jnz: (i, r, x, y) => { if (i.get(r, x) !== 0) { r._ += i.get(r, y) } else { r._++ } }
 }
 
-function p2 () {
-  let a = 0, b = 0, c = 0, d = 0, e = 0, f = 0, g = 0, h = 0;
+function isPrime (n) {
+  if (n <= 1) { return false; }
+  if (n <= 3) { return true; }
+  if (n % 2 === 0 || n % 3 === 0) { return false; }
 
-  b = 65;
-  c = b;
-
-  if (a) {
-    b *= 100;
-    b -= -100000;
-    c = b;
-    c -= -17000;
+  let i = 5;
+  while (i * i <= n) {
+    if (n % i === 0 || n % (i + 2) === 0) { return false; }
+    i += 6;
   }
+  return true;
+}
+
+function checkThing (b) {
+  for (let d = 2; d < b; d++) {
+    for (let e = 2; e < b; e++) {
+      if (d * e === b) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+function p2 () {
+  let b = 0, c = 0, h = 0;
+
+  c = b = 65;
+
+  b *= 100;
+  b -= -100000;
+  c = b;
+  c -= -17000;
 
   do {
-    f = 1;
-    d = 2;
-
-    do {
-      e = 2;
-
-      do {
-        g = d;
-        g *= e;
-        g -= b;
-
-        if (!g) {
-          f = 0;
-        }
-        e -= -1;
-        g = e;
-        g -= b;
-
-      } while (g);
-
-      d += 1;
-      g = d;
-      g -= b;
-
-    } while (g);
-
-    if (!f) {
-      h -= -1;
-    }
-
-    g = b;
-    g -= c;
-
-    if (!g) {
-      return { a, b, c, d, e, f, g, h };
-    }
-    b -= -17;
+    if (!isPrime(b)) { h++; }
+    if (b === c) { return h; }
+    b += 17;
   } while (true)
 }
 
-
 module.exports = {
+  p2,
   part1: function (input) {
     const i = parse(input), r = registers();
     while (!terminated(r, i)) {
       execute(r, i);
     }
-    console.log(r);
     return r.mul;
   },
-  part2: function (input) {
-    console.log(p2());
+  part2: function () {
+    return p2();
   }
 }

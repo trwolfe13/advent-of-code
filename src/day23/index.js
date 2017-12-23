@@ -7,5 +7,5 @@ const input = fs.readFileSync(path.join(__dirname, './input.txt'), 'utf8');
 let answer = day23.part1(input);
 console.log('Part 1', answer);
 
-answer = day23.part2(input);
+answer = day23.part2();
 console.log('Part 2', answer);
