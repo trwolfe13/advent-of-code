@@ -27,22 +27,6 @@ describe('day21', () => {
         [1, 0, 0, 1]
       ]);
     });
-    it('Produces the correct output 6x6', () => {
-      const input = [
-        [1, 1, 0, 1, 1, 0],
-        [1, 0, 0, 1, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [1, 1, 0, 1, 1, 0],
-        [1, 0, 0, 1, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-      ];
-      expect(day21.split(input)).toEqual([
-        [1, 1, 0, 1, 0, 0, 0, 0, 0],
-        [1, 1, 0, 1, 0, 0, 0, 0, 0],
-        [1, 1, 0, 1, 0, 0, 0, 0, 0],
-        [1, 1, 0, 1, 0, 0, 0, 0, 0],
-      ]);
-    });
   });
 
   describe('join', () => {
@@ -148,6 +132,44 @@ describe('day21', () => {
       expect(day21.flipV(input)).toEqual([0, 1, 0, 1, 0, 0, 1, 1, 1]);
     });
   });
+
+  describe('example data', () => {
+    it('follows the example', () => {
+      const input = `../.# => ##./#../...
+.#./..#/### => #..#/..../..../#..#`;
+      let image = day21.start, patterns = day21.parse(input);
+
+      let pieces = day21.split(image).map(p => day21.match(p, patterns));
+      image = day21.join(pieces);
+
+      expect(image).toEqual([
+        [1, 0, 0, 1],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [1, 0, 0, 1]
+      ]);
+
+      pieces = day21.split(image).map(p => day21.match(p, patterns));
+      image = day21.join(pieces);
+
+      expect(image).toEqual([
+        [1, 1, 0, 1, 1, 0],
+        [1, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [1, 1, 0, 1, 1, 0],
+        [1, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+      ]);
+
+      const sum = (p, c) => p + c;
+      expect(image.reduce((p, c) => p + c.reduce(sum, 0), 0)).toBe(12);
+    });
+    it('follows the example', () => {
+      const input = `../.# => ##./#../...
+.#./..#/### => #..#/..../..../#..#`;
+      expect(day21.run(input, 2)).toBe(12);
+    });
+  })
 
   describe('part1', () => {
     it('Produces the correct output 3x3', () => {
