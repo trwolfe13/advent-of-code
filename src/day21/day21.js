@@ -1,6 +1,11 @@
 const _ = require('lodash');
 const hashToInt = c => c === '#' ? 1 : 0;
 
+const key = piece => {
+  const chunk = _.chunk(piece, Math.sqrt(piece.length));
+  return chunk.map(p => p.join('')).join('/');
+}
+
 const twoByTwoSquare = (i, x, y) => {
   const xn = 2 * x, yn = 2 * y;
   return [
@@ -57,15 +62,33 @@ const split = image => {
   }
 }
 
+const flipV = piece => {
+  switch (piece.length) {
+    case 4: return [piece[1], piece[0], piece[3], piece[2]];
+    case 9: return [piece[2], piece[1], piece[0], piece[5], piece[4], piece[3], piece[8], piece[7], piece[6]];
+    default: throw new Error(`Unhandled piece size ${piece.length}`);
+  }
+}
+
+const rotate90 = piece => {
+  switch (piece.length) {
+    case 4: return [piece[2], piece[0], piece[3], piece[1]];
+    case 9: return [piece[6], piece[3], piece[0], piece[7], piece[4], piece[1], piece[8], piece[5], piece[2]];
+    default: throw new Error(`Unhandled piece size ${piece.length}`);
+  }
+}
+
 const match = (piece, patterns) => {
-  const chunk = _.chunk(piece, Math.sqrt(piece.length));
-  const key = chunk.map(p => p.join('')).join('/');
+  let k = '';
+  for (let n = 0; n < 8; n++) {
+    if (patterns[k = key(piece)]) break;
+    piece = n === 4 ? flipV(piece) : rotate90(piece);
+  }
 
-  // Base case.
-  if (patterns[key]) return patterns[key];
-
-  // TODO: Implement rotations.
-  throw new Error(`Unrecognized pattern: ${key}`);
+  if (!patterns[k]) {
+    throw new Error(`Unrecognized pattern: ${k}`);
+  }
+  return patterns[k];
 }
 
 const join = pieces => {
@@ -82,6 +105,8 @@ module.exports = {
   split,
   match,
   join,
+  rotate90,
+  flipV,
   part1: function (input) {
     let image = start, patterns = parse(input);
     for (let n = 0; n <= 5; n++) {

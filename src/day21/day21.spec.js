@@ -89,6 +89,64 @@ describe('day21', () => {
       const match = day21.match(input, patterns);
       expect(match).toEqual([0, 0, 1, 0]);
     });
+
+    it('Finds a 90 degree rotated match', () => {
+      const input = [1, 1, 0, 1];
+      const patterns = {
+        '01/11': [0, 0, 1, 0],
+      };
+      const match = day21.match(input, patterns);
+      expect(match).toEqual([0, 0, 1, 0]);
+    });
+
+    it('Finds a 180 degree rotated match', () => {
+      const input = [1, 1, 0, 1];
+      const patterns = {
+        '10/11': [0, 0, 1, 0],
+      };
+      const match = day21.match(input, patterns);
+      expect(match).toEqual([0, 0, 1, 0]);
+    });
+
+    it('Finds a 270 degree rotated match', () => {
+      const input = [1, 1, 0, 1];
+      const patterns = {
+        '11/10': [0, 0, 1, 0],
+      };
+      const match = day21.match(input, patterns);
+      expect(match).toEqual([0, 0, 1, 0]);
+    });
+
+    it('Finds a flipped match', () => {
+      const input = [0, 1, 0, 0, 0, 1, 1, 1, 1];
+      const patterns = {
+        '010/100/111': [0, 0, 1, 0],
+      };
+      const match = day21.match(input, patterns);
+      expect(match).toEqual([0, 0, 1, 0]);
+    });
+  });
+
+  describe('rotate90', () => {
+    it('Correct output 1', () => {
+      const input = [0, 1, 2, 3];
+      expect(day21.rotate90(input)).toEqual([2, 0, 3, 1]);
+    });
+    it('Correct output 2', () => {
+      const input = [0, 1, 0, 0, 0, 1, 1, 1, 1];
+      expect(day21.rotate90(input)).toEqual([1, 0, 0, 1, 0, 1, 1, 1, 0]);
+    });
+  });
+
+  describe('flipV', () => {
+    it('Correct output 1', () => {
+      const input = [0, 1, 2, 3];
+      expect(day21.flipV(input)).toEqual([1, 0, 3, 2]);
+    });
+    it('Correct output 2', () => {
+      const input = [0, 1, 0, 0, 0, 1, 1, 1, 1];
+      expect(day21.flipV(input)).toEqual([0, 1, 0, 1, 0, 0, 1, 1, 1]);
+    });
   });
 
   describe('part1', () => {
