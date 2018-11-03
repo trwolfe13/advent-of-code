@@ -1,5 +1,5 @@
-# advent-of-code-2017
+# Advent of Code
 
-Solutions to the 2017 puzzles from [Advent of Code](http://adventofcode.com/2017).
+Solutions to the Advent of Code puzzles from [Advent of Code](http://adventofcode.com).
 
-Solutions are written in JavaScript and run using node.
+Solutions are broken down into projects by year, and written in JavaScript and run using Node.js.
