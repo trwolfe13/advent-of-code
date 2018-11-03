@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/trwolfe13/advent-of-code-2017.git"
+    "url": "git+https://github.com/trwolfe13/advent-of-code.git"
   },
   "author": "Thomas R. Wolfe (trwolfe13)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/trwolfe13/advent-of-code-2017/issues"
+    "url": "https://github.com/trwolfe13/advent-of-code/issues"
   },
-  "homepage": "https://github.com/trwolfe13/advent-of-code-2017#readme",
+  "homepage": "https://github.com/trwolfe13/advent-of-code#readme",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
