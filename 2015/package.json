@@ -17,10 +17,9 @@
   },
   "homepage": "https://github.com/trwolfe13/advent-of-code#readme",
   "devDependencies": {
-    "jasmine": "^2.8.0"
+    "jasmine": "^2.99.0"
   },
   "dependencies": {
-    "fs": "0.0.1-security",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.11"
   }
 }
