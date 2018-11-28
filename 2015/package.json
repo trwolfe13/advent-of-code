@@ -1,0 +1,26 @@
+{
+  "name": "advent-of-code-2015",
+  "version": "1.0.0",
+  "description": "Solutions to problems from Advent of Code (2015)",
+  "main": "dist/bundle.js",
+  "scripts": {
+    "test": "jasmine --config=jasmine.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trwolfe13/advent-of-code.git"
+  },
+  "author": "Thomas R. Wolfe (trwolfe13)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trwolfe13/advent-of-code/issues"
+  },
+  "homepage": "https://github.com/trwolfe13/advent-of-code#readme",
+  "devDependencies": {
+    "jasmine": "^2.8.0"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "lodash": "^4.17.4"
+  }
+}
