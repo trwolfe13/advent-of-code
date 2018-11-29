@@ -1,9 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-const day25 = require('./day25')
+const file = require('../../util/file');
 
-let answer = day25.part1();
-console.log('Part 1', answer);
+const day = require('./day25');
 
-answer = day25.part2();
-console.log('Part 2', answer);
+console.log('  Day 25');
+
+console.log('    Part 1:', day.part1());
+console.log('    Part 2:', day.part2());

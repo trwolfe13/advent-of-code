@@ -1,11 +1,7 @@
-const fs = require('fs');
-const path = require('path');
-const day17 = require('./day17');
+const day = require('./day17');
 
+console.log('  Day 17');
 const input = 344;
 
-let answer = day17.part1(input);
-console.log('Part 1', answer);
-
-answer = day17.part2(input);
-console.log('Part 2', answer);
+console.log('    Part 1:', day.part1(input));
+console.log('    Part 2:', day.part2(input));
