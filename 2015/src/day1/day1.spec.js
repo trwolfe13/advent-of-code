@@ -7,7 +7,6 @@ describe('day1', () => {
       const result = part1('(())');
       expect(result).toBe(0);
     });
-
     it('()() equals 0', () => {
       const result = part1('()()');
       expect(result).toBe(0);
