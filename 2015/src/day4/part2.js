@@ -1,6 +1,4 @@
 const md5 = require('md5');
-const string = require('../../../util/string');
-const func = require('../../../util/func');
 
 const hash = (key, n) => md5(key + n.toString());
 
