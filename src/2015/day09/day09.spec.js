@@ -13,6 +13,9 @@ describe('day9', () => {
     });
   });
   describe('part2', () => {
-
+    it('test data', () => {
+      const result = part2(test);
+      expect(result).toBe(982);
+    });
   });
 });
