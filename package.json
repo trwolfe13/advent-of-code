@@ -4,6 +4,10 @@
   "description": "Solutions to problems from Advent of Code",
   "main": "dist/bundle.js",
   "scripts": {
+    "start:2015": "node src/2015",
+    "start:2016": "node src/2016",
+    "start:2017": "node src/2017",
+    "start:2018": "node src/2018",
     "2017-08": "webpack-dev-server --content-base src/2017/day08/graph --config ./src/2017/day08/graph/webpack.config.js",
     "test": "jasmine --config=jasmine.json",
     "test:2015": "jasmine --config=src/2015/jasmine.json",
