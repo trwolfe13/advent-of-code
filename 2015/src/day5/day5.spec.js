@@ -25,17 +25,17 @@ describe('day5', () => {
     });
   });
   describe('part2', () => {
-    // it('^v', () => {
-    //   const result = part2('^v');
-    //   expect(result).toBe(3);
-    // });
-    // it('^>v<', () => {
-    //   const result = part2('^>v<');
-    //   expect(result).toBe(3);
-    // });
-    // it('^v^v^v^v^v', () => {
-    //   const result = part2('^v^v^v^v^v');
-    //   expect(result).toBe(11);
-    // });
+    it('qjhvhtzxzqqjkmpb', () => {
+      const result = part2('qjhvhtzxzqqjkmpb');
+      expect(result).toBe(1);
+    });
+    it('uurcxstgmygtbstg', () => {
+      const result = part1('uurcxstgmygtbstg');
+      expect(result).toBe(0);
+    });
+    it('ieodomkazucvgmuy', () => {
+      const result = part1('ieodomkazucvgmuy');
+      expect(result).toBe(0);
+    });
   });
 });
