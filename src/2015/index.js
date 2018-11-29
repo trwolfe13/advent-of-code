@@ -1,3 +1,5 @@
+console.log('2015');
+
 require ('./day01');
 require ('./day02');
 require ('./day03');

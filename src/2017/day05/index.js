@@ -1,12 +1,9 @@
-const fs = require('fs');
-const path = require('path');
+const file = require('../../util/file');
 
 const day5 = require('./day5');
 
-const input = fs.readFileSync(path.join(__dirname, './input.txt'), 'utf8');
+console.log('  Day 5');
+const input = file.readString(__dirname, 'input.txt');
 
-let answer = day5.part1(input);
-console.log('Part 1', answer);
-
-answer = day5.part2(input);
-console.log('Part 2', answer);
+console.log('    Part 1:', day5.part1(input));
+console.log('    Part 2:', day5.part2(input));
