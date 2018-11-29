@@ -1,4 +1,5 @@
 module.exports = {
+  last: a => a[a.length - 1],
   grid: (x, y, v = 0) => {
     const o = [];
     while (x--) {
