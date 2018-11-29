@@ -13,13 +13,13 @@ describe('day2', () => {
     });
   });
   describe('part2', () => {
-    it(') equals 1', () => {
-      const result = part2(')');
-      //expect(result).toBe(1);
+    it('2x3x4', () => {
+      const result = part2('2x3x4');
+      expect(result).toBe(34);
     });
-    it('()()) equals 5', () => {
-      const result = part2('()())');
-      //expect(result).toBe(5);
+    it('1x1x10', () => {
+      const result = part2('1x1x10');
+      expect(result).toBe(14);
     });
   });
 });
