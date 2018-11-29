@@ -1,3 +1,5 @@
+const lookAndSay = require('./look-and-say');
+
 module.exports = function (input) {
- return 0;
+  return lookAndSay(input, 50).length;
 }
