@@ -1,0 +1,41 @@
+{
+  "name": "advent-of-code",
+  "version": "1.0.0",
+  "description": "Solutions to problems from Advent of Code",
+  "main": "dist/bundle.js",
+  "scripts": {
+    "2017-08": "webpack-dev-server --config ./src/2017/day08/graph/webpack.config.js",
+    "test": "jasmine --config=jasmine.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trwolfe13/advent-of-code.git"
+  },
+  "author": "Thomas R. Wolfe (trwolfe13)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trwolfe13/advent-of-code/issues"
+  },
+  "homepage": "https://github.com/trwolfe13/advent-of-code#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "css-loader": "^0.28.7",
+    "html-webpack-plugin": "^2.30.1",
+    "jasmine": "^2.8.0",
+    "json-loader": "^0.5.7",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
+  },
+  "dependencies": {
+    "d3": "^4.12.0",
+    "express": "^4.16.2",
+    "fs": "0.0.1-security",
+    "lodash": "^4.17.4",
+    "md5": "^2.2.1"
+  }
+}
