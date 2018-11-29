@@ -25,7 +25,6 @@ const sum = l => l.reduce((p, c) => p + c.reduce((p2, c2) => p2 + c2, 0), 0);
 module.exports = function (input) {
   const lights = array.grid(1000, 1000);
   string.lines(input).map(parse).forEach(c => {
-    console.log(c);
     command(lights, c);
   });
   return sum(lights);
