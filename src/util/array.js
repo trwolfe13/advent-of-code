@@ -1,3 +1,18 @@
+const swapIndex = (a, i1, i2) => {
+  const temp = a[i1];
+  a[i1] = a[i2];
+  a[i2] = temp;
+};
+
+const permute = (a, s = a.length, n = a.length, l = []) => {
+  if (s === 1) { l.push([...a]); return; }
+  for (let i = 0; i < s; i++) {
+    permute(a, s - 1, n, l);
+    swapIndex(a, (s % 2 == 1) ? 0 : i, s - 1);
+  }
+  return l;
+}
+
 module.exports = {
   last: a => a[a.length - 1],
   grid: (x, y, v = 0) => {
@@ -9,4 +24,10 @@ module.exports = {
     }
     return o;
   },
+  swapIndex,
+  permute,
+  projectReduce: (a, p, c) => a.reduce((last, obj) => {
+    const value = p(obj);
+    return (!last || c(last.value, value)) ? { value, obj } : last;
+  }, undefined)
 }
