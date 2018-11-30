@@ -1,3 +1,5 @@
+const part1 = require('./part1');
+
 module.exports = function (input) {
-  return 0;
+  return part1(part1(input));
 }
