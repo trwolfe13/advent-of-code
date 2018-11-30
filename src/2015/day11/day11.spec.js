@@ -3,7 +3,7 @@ const password = require('./password');;
 const part1 = require('./part1');
 const part2 = require('./part2');
 
-describe('day9', () => {
+describe('day11', () => {
   describe('increment', () => {
     it('first increment', () => {
       expect(password.increment([0, 0, 0])).toEqual([0, 0, 1]);
