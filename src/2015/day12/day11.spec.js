@@ -20,4 +20,12 @@ describe('day12', () => {
       expect(part1('[-1,{"a":1}]')).toEqual(0);
     });
   });
+  describe('part2', () => {
+    it('any', () => {
+      expect(part2('[1, 2, 3]')).toEqual(6);
+      expect(part2('[1,{"c":"red","b":2},3]')).toEqual(4);
+      expect(part2('{"d":"red","e":[1,2,3,4],"f":5}')).toEqual(0);
+      expect(part2('[1,"red",5]')).toEqual(6);
+    });
+  });
 });
