@@ -4,10 +4,10 @@ const swapIndex = (a, i1, i2) => {
   a[i2] = temp;
 };
 
-const permute = (a, s = a.length, n = a.length, l = []) => {
+const permute = (a, s = a.length, l = []) => {
   if (s === 1) { l.push([...a]); return; }
   for (let i = 0; i < s; i++) {
-    permute(a, s - 1, n, l);
+    permute(a, s - 1, l);
     swapIndex(a, (s % 2 == 1) ? 0 : i, s - 1);
   }
   return l;

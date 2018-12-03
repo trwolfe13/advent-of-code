@@ -10,7 +10,6 @@ const parse = input => string.lines(input).map(l => {
   return result;
 });
 
-
 const defaultMatch = (s, m) => s === m;
 
 const isMatch = (o, m, c) => Object.keys(o.attrs).every(k => ((c || {})[k] || defaultMatch)(o.attrs[k], m[k]));
