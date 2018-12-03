@@ -24,6 +24,18 @@ module.exports = {
     }
     return o;
   },
+  neighbours: (grid, x, y) => [
+    (grid[y - 1] || [])[x - 1],
+    (grid[y - 1] || [])[x],
+    (grid[y - 1] || [])[x + 1],
+
+    (grid[y] || [])[x - 1],
+    (grid[y] || [])[x + 1],
+
+    (grid[y + 1] || [])[x - 1],
+    (grid[y + 1] || [])[x],
+    (grid[y + 1] || [])[x + 1]
+  ],
   swapIndex,
   permute,
   projectReduce: (a, p, c) => a.reduce((last, obj) => {
