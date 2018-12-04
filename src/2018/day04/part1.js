@@ -1,7 +1,7 @@
 const Moment = require('moment');
 const _ = require('lodash');
 
-const string = require('../../util/array');
+const array = require('../../util/array');
 const string = require('../../util/string');
 const object = require('../../util/object');
 
@@ -18,19 +18,19 @@ const parse = input => {
       const dp = o.date.format('YYYY-MM-DD');
       const curDate = curGuard.actions[dp] || (curGuard.actions[dp] = {});
 
-      const awake = Object.keys(curDate).length === 0 || curDate[Object.keys(curDate).length - 1] === 1;
+      const awake = !Object.keys(curDate).length || !curDate[Object.keys(curDate).length - 1];
 
       const lastMinute = Math.max(0, Object.keys(curDate).length - 1);
       const thisMinute = o.date.minute();
 
       for (let m = lastMinute; m < thisMinute; m++) {
-        curDate[m] = awake ? 1 : 0;
+        curDate[m] = awake ? 0 : 1;
       }
-      curDate[thisMinute] = o.action.startsWith('wakes') ? 1 : 0;
+      curDate[thisMinute] = o.action.startsWith('falls') ? 1 : 0;
     }
   });
-  object.forEachKey(guards, g => {
-    object.forEachKey(g.actions, date => {
+  object.values(guards).forEach(g => {
+    object.values(g.actions).forEach(date => {
       const minutes = Object.keys(date).map(Number);
       const last = date[minutes.length - 1];
       for (let x = minutes.length - 1; x < 60; x++) {
@@ -41,9 +41,8 @@ const parse = input => {
   return guards;
 };
 
-const mostAsleep = guards => {
-  return guards[99]; // TODO: Finish
-}
+const minutesSlept = guard => _.sum(object.values(guard.actions).map(a => _.sum(Object.values(a))));
+const mostAsleep = guards => array.projectReduce(Object.keys(guards).map(k => guards[k]), minutesSlept, (p, c) => c > p).obj;
 
 const minuteMostAsleep = guard => {
   return 2; // TODO: Finish
@@ -51,11 +50,14 @@ const minuteMostAsleep = guard => {
 
 const strategy1 = guards => {
   const guard = mostAsleep(guards);
+
+  // console.log(guard);
   const minute = minuteMostAsleep(guard);
   return guard.id * minute;
 }
 
 module.exports = function (input) {
   const guards = parse(input);
+  // object.values(guards).forEach(g => console.log(g.id, minutesSlept(g)));
   return strategy1(guards);
 }
