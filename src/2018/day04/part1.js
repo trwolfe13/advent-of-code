@@ -45,19 +45,25 @@ const minutesSlept = guard => _.sum(object.values(guard.actions).map(a => _.sum(
 const mostAsleep = guards => array.projectReduce(Object.keys(guards).map(k => guards[k]), minutesSlept, (p, c) => c > p).obj;
 
 const minuteMostAsleep = guard => {
-  return 2; // TODO: Finish
-}
+  const nights = object.values(guard.actions);
+  let most = -1, minute;
+  for (let m = 0; m < 60; m++) {
+    const c = _.sum(nights.map(n => n[m]));
+    if (c > most) {
+      minute = m;
+      most = c;
+    }
+  }
+  return minute;
+};
 
 const strategy1 = guards => {
   const guard = mostAsleep(guards);
-
-  // console.log(guard);
   const minute = minuteMostAsleep(guard);
   return guard.id * minute;
 }
 
 module.exports = function (input) {
   const guards = parse(input);
-  // object.values(guards).forEach(g => console.log(g.id, minutesSlept(g)));
   return strategy1(guards);
 }
