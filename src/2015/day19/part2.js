@@ -11,7 +11,7 @@ module.exports = function (input) {
   //     ['H', 'OH'],
   //     ['O', 'HH'],
   //   ],
-  //   molecule: 'HOHOHO'
+  //   molecule: 'HOHOHOHOHOHOHOHO'
   // };
 
   const start = new Date().getTime();

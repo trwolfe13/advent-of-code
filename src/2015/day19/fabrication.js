@@ -33,28 +33,23 @@ const allPossibles = (molecule, patterns) => {
 const perms = data => allPossibles(data.molecule, data.patterns);
 
 const reverse = (start, end, patterns) => {
-  const visited = [start];
+  const visited = [];
   const queue = [{ molecule: start, steps: 0 }];
 
   while (queue.length) {
     const { molecule, steps } = queue.shift();
     if (molecule === end) { return steps; }
 
-    // console.log('Checking', molecule, steps);
-
-    // if (steps > 7) { return; }
+    if (visited.includes(molecule)) { continue; }
+    visited.push(molecule);
 
     const candidates = _.chain(patterns)
       .filter(([_, replacement]) => molecule.indexOf(replacement) > -1)
       .orderBy(([_, replacement]) => replacement.length, 'desc')
-      .reverse()
       .value()
-      .map(([x, y]) => ({ molecule: molecule.replace(x, y), steps: steps + 1 }));
+      .map(([x, y]) => ({ molecule: molecule.replace(y, x), steps: steps + 1 }));
 
-    candidates.forEach(c => {
-      queue.push(c);
-      visited.push(c.molecule);
-    });
+    queue.push(...candidates);
   }
 }
 
