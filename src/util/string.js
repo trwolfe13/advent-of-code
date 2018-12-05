@@ -9,5 +9,12 @@ module.exports = {
       value = value.replace(search, replace);
     } while (value !== last)
     return value;
+  },
+  allMatches: (input, regexPattern, flags) => {
+    const regex = new RegExp(regexPattern, (flags || '') + 'g');
+    const matches = [];
+    let match;
+    while (match = regex.exec(input)) { matches.push(match); }
+    return matches;
   }
 }
