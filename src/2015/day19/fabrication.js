@@ -32,24 +32,38 @@ const allPossibles = (molecule, patterns) => {
 
 const perms = data => allPossibles(data.molecule, data.patterns);
 
-const reverse = (start, end, patterns) => {
-  const visited = [];
-  const queue = [{ molecule: start, steps: 0 }];
+const reverse = (start, destination, replacements) => {
+  const visited = [start];
+  const queue = [{ string: start, count: 0 }];
+  const solution = [];
+  const stack = [];
 
   while (queue.length) {
-    const { molecule, steps } = queue.shift();
-    if (molecule === end) { return steps; }
+    const { string, count } = queue.shift();
+    if (string === destination) {
+      return count;
+    }
 
-    if (visited.includes(molecule)) { continue; }
-    visited.push(molecule);
-
-    const candidates = _.chain(patterns)
-      .filter(([_, replacement]) => molecule.indexOf(replacement) > -1)
-      .orderBy(([_, replacement]) => replacement.length, 'desc')
+    const candidates = _.chain(replacements)
+      .filter(([_, replacement]) => string.indexOf(replacement) >= 0)
+      .sortBy(([_, replacement]) => replacement.length)
+      .reverse()
       .value()
-      .map(([x, y]) => ({ molecule: molecule.replace(y, x), steps: steps + 1 }));
+      .map(([source, replacement]) => ({
+        string: string.replace(replacement, source),
+        count: count + 1,
+      }))
+      .filter((candidate) => !_.includes(visited, candidate.string));
 
-    queue.push(...candidates);
+    let next = _.first(candidates);
+    stack.push(..._.tail(candidates));
+    if (!next) {
+      solution.pop();
+      next = stack.pop();
+    }
+    visited.push(next.string);
+    queue.push(next);
+    solution.push(next);
   }
 }
 
