@@ -41,5 +41,6 @@ module.exports = {
   projectReduce: (a, p, c) => a.reduce((last, obj) => {
     const value = p(obj);
     return (!last || c(last.value, value)) ? { value, obj } : last;
-  }, undefined)
+  }, undefined),
+  drawGrid: grid => console.log(grid.reduce((p, c) => p + c.map(String).join('') + '\n', ''))
 }
