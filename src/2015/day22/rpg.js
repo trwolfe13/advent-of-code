@@ -44,6 +44,7 @@ const availableSpells = (spells, mana, effects) => {
 };
 
 result = spells => {
+  // TODO: Implement this method.
   const player = { hp: 50, armor: 0, mana: 500 };
   const boss = { hp: 51, damage: 9 };
   return { win: true, cost: _.sum(spells.map(s => s.cost)) };
