@@ -17,9 +17,8 @@ const spellEffect = spell => ({
 
 const allSpellPerms = (player, boss, mana, max, current = [], effects = [], perms = []) => {
   if (current.length === max) {
-    console.log(current.map(c => c.name));
     perms.push([...current]); current.splice(0, current.length);
-    return;
+    return perms;
   }
 
   effects.forEach(e => {
@@ -29,7 +28,7 @@ const allSpellPerms = (player, boss, mana, max, current = [], effects = [], perm
   effects = effects.filter(e => e.timer > 0);
 
   const available = availableSpells(spells, mana, effects);
-  
+
   available.forEach(spell => {
     spell.cast(player, boss);
     const spellList = [...current, spell];
@@ -44,6 +43,13 @@ const availableSpells = (spells, mana, effects) => {
   return spells.filter(s => s.cost <= mana && !eNames.includes(s.name))
 };
 
+result = spells => {
+  const player = { hp: 50, armor: 0, mana: 500 };
+  const boss = { hp: 51, damage: 9 };
+  return { win: true, cost: _.sum(spells.map(s => s.cost)) };
+}
+
 module.exports = {
-  allSpellPerms
+  allSpellPerms,
+  result
 };
