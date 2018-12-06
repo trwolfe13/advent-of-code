@@ -22,6 +22,15 @@ const mapSectors = (grid, coords) => {
   });
 }
 
+const mapRegion = (grid, coords, threshold) => {
+  grid.forEach((row, y) => {
+    row.forEach((_c, x) => {
+      const total = _.sum(coords.map(c => points.manhattan([x, y], c.coord)));
+      grid[y][x] = total < threshold ? 1 : 0;
+    });
+  });
+}
+
 const sectorSize = (grid, index) => grid.reduce((p, c) => p + c.filter(n => n === index).length, 0)
 const sectorSizes = (grid, coords) => coords.map(c => ({ ...c, size: sectorSize(grid, c.id) }));
 
@@ -39,6 +48,8 @@ module.exports = {
   parse,
   buildGrid,
   mapSectors,
+  mapRegion,
+  sectorSize,
   sectorSizes,
   finiteSectors
 }
