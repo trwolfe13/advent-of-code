@@ -61,7 +61,7 @@ const availableSpells = (spells, player, effects) => {
   return spells.filter(s => s.cost <= player.mana && !eNames.includes(s.name))
 };
 
-result = (spells, playerModel, bossModel) => {
+result = (spells, playerModel, bossModel, hardMode = false) => {
   // TODO: Implement this method.
   const effects = [];
   const cast = [];
@@ -74,6 +74,10 @@ result = (spells, playerModel, bossModel) => {
     processEffects(effects, player, boss);
 
     // Player's turn.
+    if (hardMode) {
+      player.hp--;
+      if (player.hp <= 0) { break; }
+    }
     const spell = spells[turn];
     effects.push(castSpell(player, spell, boss));
     cast.push(spell);
