@@ -2,9 +2,11 @@ const parse = input => string.lines(input).map(l => ({ instruction: l.substring(
 
 
 const instructions = {
-  hlf: s => s.r /= 2,
-  tpl: s => s.r *= 3
-  inc: 
+  hlf: (s, p) => s[p] /= 2,
+  tpl: (s, p) => s[p] *= 3,
+  inc: (s, p) => s[p]++,
+  jpm: (s, p) => s.c += p,
+  
 }
 
 
