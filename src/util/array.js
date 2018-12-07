@@ -15,6 +15,7 @@ const permute = (a, s = a.length, l = []) => {
 
 module.exports = {
   last: a => a[a.length - 1],
+  product: a => !a.length ? 0 : a.reduce((p, c) => p * c, 1),
   grid: (x, y, v = 0) => {
     const o = [];
     while (x--) {
