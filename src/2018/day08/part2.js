@@ -1,3 +1,7 @@
+const nodes = require('./nodes');
+
 module.exports = function (input) {
-  return undefined;
+  const stream = input.split(' ').map(Number);
+  const root = nodes.parseNode(stream);
+  return root.value;
 }
