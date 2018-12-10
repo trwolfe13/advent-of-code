@@ -1,3 +1,7 @@
+const message = require('./message');
+const _ = require('lodash');
+
 module.exports = function (input) {
-  return undefined;
+  const points = message.parse(input);
+  return message.minBounds(points).seconds;
 }
