@@ -13,7 +13,7 @@ module.exports = function (input) {
       if (smallest.points.find(p => p.position[0] === x && p.position[1] === y)) {
         buffer += '#';
       } else {
-        buffer += '.';
+        buffer += ' ';
       }
     }
     buffer += '\n';
