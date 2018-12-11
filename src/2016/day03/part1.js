@@ -1,7 +1,7 @@
 const string = require('../../util/string')
 const _ = require('lodash');
 
-const parse = input => string.lines(input).map(line => line.split(' ').map(Number));
+const parse = input => string.lines(input).map(line => line.split(/\s+/).map(Number));
 
 const isPossible = triangle => { const max = _.max(triangle); return max < _.sum(triangle) - max; }
 
