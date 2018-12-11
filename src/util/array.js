@@ -42,6 +42,15 @@ module.exports = {
     (grid[y + 1] || [])[x],
     (grid[y + 1] || [])[x + 1]
   ],
+  squareSum: (grid, x, y, size) => {
+    let total = 0;
+    for (let xi = x; xi < x + size; xi++) {
+      for (let yi = y; yi < y + size; yi++) {
+        total += grid[yi][xi];
+      }
+    }
+    return total;
+  },
   swapIndex,
   permute,
   projectReduce: (a, p, c) => a.reduce((last, obj) => {
