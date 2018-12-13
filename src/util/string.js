@@ -1,7 +1,11 @@
+const chars = input => input.split('');
+const lines = (input, trim = true) => input.match(/[^\r\n]+/g).map(n => trim ? n.trim() : n);
+
 module.exports = {
-  chars: input => input.split(''),
-  words: input => input.split(/\s/g),
-  lines: input => input.match(/[^\r\n]+/g).map(n => n.trim()),
+  chars,
+  lines,
+  words: input => input.split(/\s+/g),
+  grid: input => lines(input, false).map(chars),
   replaceAll: (input, search, replace) => {
     let value = input, last = undefined;
     do {
