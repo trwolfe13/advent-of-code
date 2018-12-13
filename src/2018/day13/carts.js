@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const string = require('../../util/string');
 
 const UP = '^', DOWN = 'v', LEFT = '<', RIGHT = '>';
@@ -72,8 +73,10 @@ const processCollisions = (state) => {
   return ids;
 }
 
+const orderedCarts = carts => _.sortBy(carts, c => c.pos[0], c => c.pos[1]);
+
 const tick = (state, removeCollisions = false) => {
-  state.carts.forEach(cart => {
+  orderedCarts(state.carts).forEach(cart => {
     move(cart);
     const collisions = processCollisions(state);
     if (removeCollisions) {
