@@ -1,5 +1,8 @@
 
-const nextRecipes = state => state.current.map(c => state.scores[c]).reduce((p, c) => p + c, 0).toString().split('').map(Number);
+const nextRecipes = state => {
+  const sum = state.scores[state.current[0]] + state.scores[state.current[1]];
+  return sum > 9 ? [Math.trunc(sum / 10), sum % 10] : [sum];
+}
 
 const moveForward = state => {
   for (let x = 0; x < state.current.length; x++) {
