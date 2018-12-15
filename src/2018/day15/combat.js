@@ -25,7 +25,7 @@ const round = state => creatureInitiative(state).forEach(creature => turn(state,
 
 const turn = (state, creature) => {
   const targets = availableTargets(state, creature);
-  const target = closestTarget(creature, targets);
+  const target = closestTarget(state, creature, targets);
   if (target) {
     move(creature, target.next);
     attack(creature, target.creature);
@@ -34,14 +34,21 @@ const turn = (state, creature) => {
 
 const availableTargets = (state, creature) => state.creatures.filter(c => c.type !== creature.type && c.hp > 0);
 
-const closestTarget = (creature, targets) => {
+const closestTarget = (state, creature, targets) => {
   const inRange = targetsInRange(creature, targets);
   if (inRange.length > 0) { return inRange[0]; }
-  console.log('Clever path finding required');
-  // TODO: Clever path finding.
+
+  const paths = targets.map(target => ({ target, path: shortestPath(state, creature, target) }));
+  const shortest = _.min(paths.map(p => p.path.length));
+  const shortestPaths = paths.filter(p => p.path.length === shortest);
+  return readingOrder(shortestPaths.map(p => p.target));
 };
 
 const targetsInRange = (creature, targets) => readingOrder(targets.filter(t => points.manhattan(t, creature) === 1));
+
+const shortestPath = (state, creature, target) => {
+
+}
 
 const move = (creature, p) => creature.x = p.x; creature.y = p.y;
 const attack = (state, creature) => {
