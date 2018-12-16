@@ -10,11 +10,20 @@ module.exports = function (part1, part2) {
 
   while (unknownCodes.length) {
     const knownCodes = _.uniq(behaviors.filter(b => b.couldBe.length === 1).map(b => b.code));
+    console.log('Known codes', knownCodes);
     const known = knownCodes.map(code => behaviors.find(b => b.code === code && b.couldBe.length === 1)); 
+
+    console.log('Known', known);
+
     known.forEach(behavior => {
       operationMap[behavior.code] === behavior.couldBe[0];
-    })
+    });
+    console.log('New op map', operationMap);
+
     unknownCodes = unknownCodes.filter(c => !knownCodes.includes(c));
+    console.log('Remaining codes', unknownCodes);
+    
+    break;
   }
 
   console.log(operationMap);
