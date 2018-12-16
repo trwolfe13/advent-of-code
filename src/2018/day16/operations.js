@@ -37,16 +37,40 @@ const testBehavior = test => {
     const registers = [...test.before];
     operations[op](test.params, registers);
     return _.isEqual(registers, test.after);
-  }).map(o => o.name);
+  });
 }
 
-module.exports = function (input) {
-  const tests = parse(input);
-  const behaviors = tests.map(testBehavior);
-  return behaviors.filter(t => t.length >= 3).length;
-}
+const decodeOpMap = tests => {
+  const behaviors = tests.map(t => ({ code: t.opcode, couldBe: testBehavior(t) }));
+
+  let unknownIds = _.uniq(tests.map(t => t.opcode)).sort((a, b) => a - b);
+  const knownCodes = [];
+  const operationMap = {};
+
+  while (unknownIds.length) {
+    const knownIds = _.uniq(behaviors.filter(b => b.couldBe.length === 1).map(n => n.code));
+    const knownBehaviors = knownIds.map(code => behaviors.find(b => b.code === code && b.couldBe.length === 1));
+    knownBehaviors.forEach(behavior => {
+      knownCodes.push(behavior.couldBe[0]);
+      operationMap[behavior.code] = behavior.couldBe[0];
+    });
+    unknownIds = unknownIds.filter(c => !knownIds.includes(c));
+    behaviors.forEach(b => b.couldBe = b.couldBe.filter(c => !knownCodes.includes(c)));
+  }
+  return operationMap;
+};
+
+const runProgram = (program, operationMap, registers = [0, 0, 0, 0]) => {
+  program.forEach(line => {
+    const opcode = operationMap[line[0]];
+    operations[opcode](line.slice(1), registers);
+  });
+  return registers;
+};
 
 module.exports = {
   parse,
-  testBehavior
+  testBehavior,
+  decodeOpMap,
+  runProgram
 }
