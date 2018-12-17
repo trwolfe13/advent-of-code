@@ -23,8 +23,8 @@ module.exports = {
   },
   grid: (x, y, v = 0) => {
     const o = [];
-    while (x--) {
-      let c = y, r = [];
+    while (y--) {
+      let c = x, r = [];
       while (c--) { r.push(v); }
       o.push(r);
     }
@@ -57,5 +57,15 @@ module.exports = {
     const value = p(obj);
     return (!last || c(last.value, value)) ? { value, obj } : last;
   }, undefined),
-  drawGrid: grid => console.log(grid.reduce((p, c) => p + c.map(String).join('') + '\n', ''))
+  drawGrid: (grid, x1 = 0, x2 = grid[0].length - 1, y1 = 0, y2 = grid.length - 1) => {
+    let buffer = '';
+    for (let y = y1; y <= y2; y++) {
+      for (let x = x1; x <= x2; x++) {
+        buffer += grid[y][x];
+      }
+      buffer += '\n';
+    }
+    console.log(buffer);
+    return grid;
+  }
 }
