@@ -1,4 +1,4 @@
-console.log('2017');
+console.log('2019');
 
 require('./day01');
 require('./day02');
