@@ -8,12 +8,14 @@
     "start:2016": "node src/2016",
     "start:2017": "node src/2017",
     "start:2018": "node src/2018",
+    "start:2019": "node src/2019",
     "2017-08": "webpack-dev-server --content-base src/2017/day08/graph --config ./src/2017/day08/graph/webpack.config.js",
     "test": "jasmine --config=jasmine.json",
     "test:2015": "jasmine --config=src/2015/jasmine.json",
     "test:2016": "jasmine --config=src/2016/jasmine.json",
     "test:2017": "jasmine --config=src/2017/jasmine.json",
     "test:2018": "jasmine --config=src/2018/jasmine.json",
+    "test:2019": "jasmine --config=src/2019/jasmine.json",
     "test:util": "jasmine --config=src/util/jasmine.json"
   },
   "repository": {
