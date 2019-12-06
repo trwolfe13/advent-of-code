@@ -9,7 +9,6 @@ function isValid(number) {
   return hasDouble;
 }
 
-
 module.exports = function (input) {
   const [start, end] = input.split('-').map(Number);
   const valid = [];
